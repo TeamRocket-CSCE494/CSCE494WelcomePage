@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MaterialApp(
+    initialRoute: '/',
+    routes: {
+      '/': (context) => MyApp(),
+      '/second': (context) => ChooseLeagueType(),
+      '/third': (context) => CreateLeague(),
+      '/fourth': (context) => JoinLeague(),
+    },
+  ));
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
-  void _startGameButton() {
-
-  }
 
   // This widget is the root of your application.
   @override
@@ -85,13 +90,133 @@ class MyApp extends StatelessWidget {
                   borderRadius: BorderRadius.all(Radius.circular(10.0)),
                 ),
               ),
-              onPressed: _startGameButton, // replace this with the method that starts the game
+              onPressed: () {
+                Navigator.pushNamed(context, '/second');
+              },
 
             ),
           ]
         )
       ),
 
+    );
+  }
+}
+class ChooseLeagueType extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Choose Your League Type"),
+        backgroundColor: Colors.blueGrey,
+      ),
+      body: Column(
+        children: [
+          const SizedBox(height: 50),
+          TextButton(
+            onPressed: () {
+              Navigator.pushNamed(context, '/third');
+            },
+            child: Text('Create League', style: TextStyle(fontSize: 50.0),),
+            style: TextButton.styleFrom(
+              alignment: FractionalOffset.center,
+              primary: Colors.black,
+              backgroundColor: Colors.blueGrey,
+              padding: EdgeInsets.only(top: 20, bottom: 10, right: 15, left: 15),
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10.0)),
+              ),
+            ),
+          ),
+          const SizedBox(height: 50),
+          TextButton(
+            onPressed: () {
+              Navigator.pushNamed(context, '/fourth');
+            },
+            child: Text('Join League', style: TextStyle(fontSize: 50.0),),
+            style: TextButton.styleFrom(
+              alignment: FractionalOffset.center,
+              primary: Colors.black,
+              backgroundColor: Colors.blueGrey,
+              padding: EdgeInsets.only(top: 20, bottom: 10, right: 15, left: 15),
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10.0)),
+              ),
+            ),
+          ),
+          const SizedBox(height: 50),
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: Text('Resume League', style: TextStyle(fontSize: 50.0),),
+            style: TextButton.styleFrom(
+              alignment: FractionalOffset.center,
+              primary: Colors.black,
+              backgroundColor: Colors.blueGrey,
+              padding: EdgeInsets.only(top: 20, bottom: 10, right: 15, left: 15),
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10.0)),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+class CreateLeague extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+        title: Text("Create Your League"),
+    backgroundColor: Colors.blueGrey,
+    ),
+    );
+  }
+}
+class JoinLeague extends StatelessWidget {
+  const JoinLeague({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Join a League"),
+        backgroundColor: Colors.blueGrey,
+
+      ),
+      body: Center(
+
+      child: SizedBox(
+      width: 400,
+        child: TextField(
+          decoration: InputDecoration(
+            border: OutlineInputBorder(),
+            hintText: 'Enter a team name',
+          ),
+        ),
+        //child: Text('Join league ' + leaguename +'?'),
+    ),
+        //below this one is the point
+      ),
+
+    );
+  }
+
+}
+
+class WelcomeScreen extends StatelessWidget {
+  const WelcomeScreen();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Text('Join a Moolah Master League', style: Theme.of(context).textTheme.headline2),
+
+      ),
     );
   }
 }
