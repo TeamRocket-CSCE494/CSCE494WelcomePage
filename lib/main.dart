@@ -56,7 +56,6 @@ class MyApp extends StatelessWidget {
                 ),
               ],
             ),
-
           ),
           /*3*/
         ],
@@ -184,13 +183,22 @@ class CreateLeague extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
-                  padding: const EdgeInsets.only(bottom: 8),
-                  child: const Text(
+                Row(
+                  children : [
+                  Text(
                     'Moolah Master',
                     style: TextStyle(
                         fontSize: 50, color: Color.fromRGBO(239, 41, 23, 1)),
                   ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 0),
+                      child: Image.asset(
+                        'assets/MoolahMasterLogo2.png',
+                        height: 100,
+                        width: 100,
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
