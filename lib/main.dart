@@ -198,11 +198,11 @@ class CreateLeague extends StatelessWidget {
                           fontSize: 50, color: Color.fromRGBO(239, 41, 23, 1)),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(top: 0),
+                      padding: const EdgeInsets.only(top: 0, left: 0),
                       child: Image.asset(
                         'assets/MoolahMasterLogo2.png',
-                        height: 100,
-                        width: 100,
+                        height: 95,
+                        width: 95,
                       ),
                     ),
                   ],
@@ -402,10 +402,10 @@ class JoinLeagueScreen extends StatelessWidget {
       backgroundColor: Color.fromRGBO(01, 19, 36, 20),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        title: const Text('Join a League!'),
+        centerTitle: true,
+        title: const Text('Join a League!')
       ),
       body: new Column(
-        //padding: const EdgeInsets.all(32),
           children: [
       Expanded(
       child: Column(
@@ -413,27 +413,36 @@ class JoinLeagueScreen extends StatelessWidget {
           children: [
             Column(
               children: [
-                Text(
+                Padding(
+                  
+                padding: EdgeInsets.only(top:15, bottom: 20),
+                child: Center(
+                  child: Text(
                   'Moolah Master',
                   style: TextStyle(
-                    fontSize: 50,
+                    fontSize: 60,
+                    fontWeight: FontWeight.bold,
                     color: Color.fromRGBO(239, 41, 23, 1),
                     fontFamily: 'Bebas Neue',),
+                  ),
+                ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 0),
+                padding: EdgeInsets.only(top:0, bottom: 60),
                   child: Image.asset(
                     'assets/MoolahMasterLogo2.png',
-                    height: 100,
-                    width: 100,
+                    height: 200,
+                    width: 200,
                   ),
                 ),
               ],
             ),
+
             Column(
               children: [
-                SizedBox(
-                  width: 400,
+                Center(
+                child: SizedBox(
+                  width: 350,
                   child: FormBuilderTextField(
 
                     name: 'joinedleague',
@@ -442,7 +451,7 @@ class JoinLeagueScreen extends StatelessWidget {
                         color: Color.fromRGBO(239, 41, 23, 1), fontSize: 20),
                     decoration: InputDecoration(
                       labelText: 'ENTER A TEAM NAME:',
-                      labelStyle: TextStyle(color: Colors.white, fontSize: 30),
+                      labelStyle: TextStyle(color: Colors.white, fontSize: 30, fontWeight: FontWeight.bold,),
                       enabledBorder: const OutlineInputBorder(
                           borderSide:
                           BorderSide(color: Colors.white, width: 0.0)),
@@ -451,24 +460,30 @@ class JoinLeagueScreen extends StatelessWidget {
                   ),
 
                 ),
+                ),
               ],
             ),
-            TextButton(
-              child: Text('Next',
-                style: TextStyle(fontSize: 50.0, fontFamily: 'Bebas Neue',),),
+            Padding(
+              padding: EdgeInsets.all(15),
+            ),
+            Center(
+            child: TextButton(
+              child: Text('Continue',
+                style: TextStyle(fontSize: 35.0, fontFamily: 'Bebas Neue',fontWeight: FontWeight.bold,),),
               style: TextButton.styleFrom(
-                primary: Colors.black,
-                backgroundColor: Colors.blueGrey,
+                primary: Colors.white,
+                backgroundColor: Color.fromRGBO(239, 41, 23, 1),
                 padding: EdgeInsets.only(
-                    top: 20, bottom: 10, right: 15, left: 15),
+                    top: 20, bottom: 10, right: 35, left: 35),
                 shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                  borderRadius: BorderRadius.all(Radius.circular(5.0)),
                 ),
               ),
               onPressed: () {
                 Navigator.pushNamed(context, '/fifth');
               },
 
+            ),
             ),
           ]
       ),
