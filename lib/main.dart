@@ -16,6 +16,7 @@ void main() {
       '/fourth': (context) => JoinLeagueApp(),
       '/fifth': (context) => JoinSpecificLeague(),
       '/sixth': (context) => CreateLineupPage(),
+      '/seventh': (context) => ViewLineupPage(),
     },
   ));
 }
@@ -529,6 +530,285 @@ class CreateLineupPage extends StatefulWidget {
   State<CreateLineupPage> createState() => _CreateLineupPageState();
 }
 class _CreateLineupPageState extends State<CreateLineupPage> {
+  String teamname = "Teamname"; // change once we get team names from API
+
+  @override
+  Widget build(BuildContext context) {
+
+    return Scaffold(
+      backgroundColor: Color.fromRGBO(01, 19, 36, 20),
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        centerTitle: true,
+        title: const Text('Choose Your Lineup!'),
+      ),
+      body: Center(
+
+        child: Column(
+
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Padding(padding: EdgeInsets.only(
+                top: 5, bottom: 10),),
+            Text(
+                '${teamname}\'s current lineup:',
+                 style: TextStyle(color:Colors.white, fontFamily: 'bebas neue', fontSize: 30,)
+            ),
+            Padding(padding: EdgeInsets.only(
+                top: 5, bottom: 20),),
+            Row(
+              // this is where the actual stocks are gonna be displayed
+
+              // stocks
+              children: [
+                const Spacer(),
+                Container(width: 75, height: 75, color: Color.fromRGBO(239, 41, 23, 1), ),
+                const Spacer(),
+                Container(width: 75, height: 75, color: Color.fromRGBO(239, 41, 23, 1)),
+                const Spacer(),
+                Container(width: 75, height: 75, color: Color.fromRGBO(239, 41, 23, 1)),
+                const Spacer(),
+                Container(width: 75, height: 75, color: Color.fromRGBO(239, 41, 23, 1)),
+                const Spacer(),
+                Container(width: 75, height: 75, color: Color.fromRGBO(239, 41, 23, 1)),
+                const Spacer(),
+              ],
+            ),
+            Padding(padding: EdgeInsets.only(
+                top: 30, bottom: 10),),
+            const Text("Tap the stocks from the selection below to add them to your lineup!", textAlign: TextAlign.center, style: TextStyle(color:Colors.white, fontFamily: 'bebas neue', fontSize: 30)),
+            Padding(padding: EdgeInsets.only(
+                top: 5, bottom: 10),),
+            Expanded(
+            child: ListView(
+              scrollDirection: Axis.vertical,
+                children: <Widget>[
+                  Row(
+                    children: [
+                      const Spacer(),
+                      SizedBox(
+                        height: 100,
+                        width: 100,
+                      child: TextButton(
+                        child: Text('NASDAQ',
+                          style: TextStyle(fontSize: 20.0, fontFamily: 'Bebas Neue',fontWeight: FontWeight.bold,),),
+                        style: TextButton.styleFrom(
+                          primary: Colors.white,
+                          backgroundColor: Color.fromRGBO(4, 119, 111, 1),
+                        ),
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/fifth');
+                        },
+
+                      ),
+                      ),
+                      const Spacer(),
+
+                      SizedBox(
+                        height: 100,
+                        width: 100,
+                        child: TextButton(
+                          child: Text('APPLE',
+                            style: TextStyle(fontSize: 20.0, fontFamily: 'Bebas Neue',fontWeight: FontWeight.bold,),),
+                          style: TextButton.styleFrom(
+                            primary: Colors.white,
+                            backgroundColor: Color.fromRGBO(4, 119, 111, 1),
+                          ),
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/fifth');
+                          },
+
+                        ),
+                      ),
+                      const Spacer(),
+
+                      SizedBox(
+                        height: 100,
+                        width: 100,
+                        child: TextButton(
+                          child: Text('DOW JONES',
+                            style: TextStyle(fontSize: 20.0, fontFamily: 'Bebas Neue',fontWeight: FontWeight.bold,),),
+                          style: TextButton.styleFrom(
+                            primary: Colors.white,
+                            backgroundColor: Color.fromRGBO(4, 119, 111, 1),
+                          ),
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/fifth');
+                          },
+
+                        ),
+                      ),
+                      const Spacer(),
+                    ]
+                  ),
+                  Padding(padding: EdgeInsets.only(
+                      top: 20, bottom: 10),),
+                  Row(
+                      children: [
+                        const Spacer(),
+                        SizedBox(
+                          height: 100,
+                          width: 100,
+                          child: TextButton(
+                            child: Text('MICROSOFT',
+                              style: TextStyle(fontSize: 20.0, fontFamily: 'Bebas Neue',fontWeight: FontWeight.bold,),),
+                            style: TextButton.styleFrom(
+                              primary: Colors.white,
+                              backgroundColor: Color.fromRGBO(4, 119, 111, 1),
+                            ),
+                            onPressed: () {
+                              Navigator.pushNamed(context, '/fifth');
+                            },
+
+                          ),
+                        ),
+                        const Spacer(),
+
+                        SizedBox(
+                          height: 100,
+                          width: 100,
+                          child: TextButton(
+                            child: Text('TESLA',
+                              style: TextStyle(fontSize: 20.0, fontFamily: 'Bebas Neue',fontWeight: FontWeight.bold,),),
+                            style: TextButton.styleFrom(
+                              primary: Colors.white,
+                              backgroundColor: Color.fromRGBO(4, 119, 111, 1),
+                            ),
+                            onPressed: () {
+                              Navigator.pushNamed(context, '/fifth');
+                            },
+
+                          ),
+                        ),
+                        const Spacer(),
+
+                        SizedBox(
+                          height: 100,
+                          width: 100,
+                          child: TextButton(
+                            child: Text('AMAZON',
+                              style: TextStyle(fontSize: 20.0, fontFamily: 'Bebas Neue',fontWeight: FontWeight.bold,),),
+                            style: TextButton.styleFrom(
+                              primary: Colors.white,
+                              backgroundColor: Color.fromRGBO(4, 119, 111, 1),
+                            ),
+                            onPressed: () {
+                              Navigator.pushNamed(context, '/fifth');
+                            },
+
+                          ),
+                        ),
+                        const Spacer(),
+                      ]
+                  ),
+                  Padding(padding: EdgeInsets.only(
+                      top: 20, bottom: 10),),
+                  Row(
+                      children: [
+                        const Spacer(),
+                        SizedBox(
+                          height: 100,
+                          width: 100,
+                          child: TextButton(
+                            child: Text('BANK OF AMERICA',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(fontSize: 20.0, fontFamily: 'Bebas Neue',fontWeight: FontWeight.bold,),),
+                            style: TextButton.styleFrom(
+                              primary: Colors.white,
+                              backgroundColor: Color.fromRGBO(4, 119, 111, 1),
+                            ),
+                            onPressed: () {
+                              Navigator.pushNamed(context, '/fifth');
+                            },
+
+                          ),
+                        ),
+                        const Spacer(),
+
+                        SizedBox(
+                          height: 100,
+                          width: 100,
+                          child: TextButton(
+                            child: Text('EXXON',
+                              style: TextStyle(fontSize: 20.0, fontFamily: 'Bebas Neue',fontWeight: FontWeight.bold,),),
+                            style: TextButton.styleFrom(
+                              primary: Colors.white,
+                              backgroundColor: Color.fromRGBO(4, 119, 111, 1),
+                            ),
+                            onPressed: () {
+                              Navigator.pushNamed(context, '/fifth');
+                            },
+
+                          ),
+                        ),
+                        const Spacer(),
+
+                        SizedBox(
+                          height: 100,
+                          width: 100,
+                          child: TextButton(
+                            child: Text('JP MORGAN',
+                              style: TextStyle(fontSize: 20.0, fontFamily: 'Bebas Neue',fontWeight: FontWeight.bold,),),
+                            style: TextButton.styleFrom(
+                              primary: Colors.white,
+                              backgroundColor: Color.fromRGBO(4, 119, 111, 1),
+                            ),
+                            onPressed: () {
+                              Navigator.pushNamed(context, '/fifth');
+                            },
+
+                          ),
+                        ),
+                        const Spacer(),
+                      ]
+                  ),
+            ],
+            ),
+
+            ),
+            Padding(padding: EdgeInsets.only(
+                top: 20, bottom: 10),),
+            Center(
+              child: TextButton(
+                child: Text('Continue',
+                  style: TextStyle(fontSize: 35.0, fontFamily: 'Bebas Neue',fontWeight: FontWeight.bold,),),
+                style: TextButton.styleFrom(
+                  primary: Colors.white,
+                  backgroundColor: Color.fromRGBO(239, 41, 23, 1),
+                  padding: EdgeInsets.only(
+                      top: 20, bottom: 10, right: 35, left: 35),
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                  ),
+                ),
+                onPressed: () {
+                  Navigator.pushNamed(context, '/sixth');
+                },
+
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+class ViewLineupPage extends StatefulWidget {
+
+  // This widget is the home page of your application. It is stateful, meaning
+  // that it has a State object (defined below) that contains fields that affect
+  // how it looks.
+
+  // This class is the configuration for the state. It holds the values (in this
+  // case the title) provided by the parent (in this case the App widget) and
+  // used by the build method of the State. Fields in a Widget subclass are
+  // always marked "final".
+
+
+  @override
+  State<ViewLineupPage> createState() => _ViewLineupPageState();
+}
+class _ViewLineupPageState extends State<ViewLineupPage> {
   String teamname = "Teamname"; // change once we get team names from API
 
   @override
