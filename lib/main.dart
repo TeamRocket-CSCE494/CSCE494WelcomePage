@@ -528,18 +528,12 @@ class CreateLineupPage extends StatefulWidget {
   @override
   State<CreateLineupPage> createState() => _CreateLineupPageState();
 }
-
 class _CreateLineupPageState extends State<CreateLineupPage> {
   String teamname = "Teamname"; // change once we get team names from API
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
+
     return Scaffold(
       backgroundColor: Color.fromRGBO(01, 19, 36, 20),
       appBar: AppBar(
@@ -548,38 +542,26 @@ class _CreateLineupPageState extends State<CreateLineupPage> {
         title: const Text('Choose Your Lineup!'),
       ),
       body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
+
         child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
+
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Spacer(),
+            Padding(padding: EdgeInsets.only(
+                top: 5, bottom: 10),),
             Text(
                 '${teamname}\'s current lineup:',
                  style: TextStyle(color:Colors.white, fontFamily: 'bebas neue', fontSize: 30,)
             ),
-            const Spacer(),
+            Padding(padding: EdgeInsets.only(
+                top: 5, bottom: 20),),
             Row(
               // this is where the actual stocks are gonna be displayed
 
               // stocks
               children: [
                 const Spacer(),
-                Container(width: 75, height: 75, color: Color.fromRGBO(239, 41, 23, 1)),
+                Container(width: 75, height: 75, color: Color.fromRGBO(239, 41, 23, 1), ),
                 const Spacer(),
                 Container(width: 75, height: 75, color: Color.fromRGBO(239, 41, 23, 1)),
                 const Spacer(),
@@ -591,9 +573,11 @@ class _CreateLineupPageState extends State<CreateLineupPage> {
                 const Spacer(),
               ],
             ),
-            const Spacer(),
+            Padding(padding: EdgeInsets.only(
+                top: 30, bottom: 10),),
             const Text("Tap the stocks from the selection below to add them to your lineup!", textAlign: TextAlign.center, style: TextStyle(color:Colors.white, fontFamily: 'bebas neue', fontSize: 30)),
-            const Spacer(),
+            Padding(padding: EdgeInsets.only(
+                top: 5, bottom: 10),),
             Expanded(
             child: ListView(
               scrollDirection: Axis.vertical,
@@ -601,52 +585,207 @@ class _CreateLineupPageState extends State<CreateLineupPage> {
                   Row(
                     children: [
                       const Spacer(),
-                    Container(width: 75, height: 75, color: Color.fromRGBO(4, 119, 0, 1),),
+                      SizedBox(
+                        height: 100,
+                        width: 100,
+                      child: TextButton(
+                        child: Text('NASDAQ',
+                          style: TextStyle(fontSize: 20.0, fontFamily: 'Bebas Neue',fontWeight: FontWeight.bold,),),
+                        style: TextButton.styleFrom(
+                          primary: Colors.white,
+                          backgroundColor: Color.fromRGBO(4, 119, 111, 1),
+                        ),
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/fifth');
+                        },
+
+                      ),
+                      ),
                       const Spacer(),
-                    Container(width: 75, height: 75, color: Color.fromRGBO(4, 119, 111, 1),),
+
+                      SizedBox(
+                        height: 100,
+                        width: 100,
+                        child: TextButton(
+                          child: Text('APPLE',
+                            style: TextStyle(fontSize: 20.0, fontFamily: 'Bebas Neue',fontWeight: FontWeight.bold,),),
+                          style: TextButton.styleFrom(
+                            primary: Colors.white,
+                            backgroundColor: Color.fromRGBO(4, 119, 111, 1),
+                          ),
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/fifth');
+                          },
+
+                        ),
+                      ),
                       const Spacer(),
-                    Container(width: 75, height: 75, color: Color.fromRGBO(4, 119, 0, 1),),
-                      const Spacer(),
-                    Container(width: 75, height: 75, color: Color.fromRGBO(4, 119, 111, 1),),
-                      const Spacer(),
-                    Container(width: 75, height: 75, color: Color.fromRGBO(4, 119, 0, 1),),
+
+                      SizedBox(
+                        height: 100,
+                        width: 100,
+                        child: TextButton(
+                          child: Text('DOW JONES',
+                            style: TextStyle(fontSize: 20.0, fontFamily: 'Bebas Neue',fontWeight: FontWeight.bold,),),
+                          style: TextButton.styleFrom(
+                            primary: Colors.white,
+                            backgroundColor: Color.fromRGBO(4, 119, 111, 1),
+                          ),
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/fifth');
+                          },
+
+                        ),
+                      ),
                       const Spacer(),
                     ]
                   ),
+                  Padding(padding: EdgeInsets.only(
+                      top: 20, bottom: 10),),
                   Row(
                       children: [
                         const Spacer(),
-                        Container(width: 75, height: 75, color: Color.fromRGBO(4, 119, 111, 1),),
+                        SizedBox(
+                          height: 100,
+                          width: 100,
+                          child: TextButton(
+                            child: Text('MICROSOFT',
+                              style: TextStyle(fontSize: 20.0, fontFamily: 'Bebas Neue',fontWeight: FontWeight.bold,),),
+                            style: TextButton.styleFrom(
+                              primary: Colors.white,
+                              backgroundColor: Color.fromRGBO(4, 119, 111, 1),
+                            ),
+                            onPressed: () {
+                              Navigator.pushNamed(context, '/fifth');
+                            },
+
+                          ),
+                        ),
                         const Spacer(),
-                        Container(width: 75, height: 75, color: Color.fromRGBO(4, 119, 0, 1),),
+
+                        SizedBox(
+                          height: 100,
+                          width: 100,
+                          child: TextButton(
+                            child: Text('TESLA',
+                              style: TextStyle(fontSize: 20.0, fontFamily: 'Bebas Neue',fontWeight: FontWeight.bold,),),
+                            style: TextButton.styleFrom(
+                              primary: Colors.white,
+                              backgroundColor: Color.fromRGBO(4, 119, 111, 1),
+                            ),
+                            onPressed: () {
+                              Navigator.pushNamed(context, '/fifth');
+                            },
+
+                          ),
+                        ),
                         const Spacer(),
-                        Container(width: 75, height: 75, color: Color.fromRGBO(4, 119, 111, 1),),
-                        const Spacer(),
-                        Container(width: 75, height: 75, color: Color.fromRGBO(4, 119, 0, 1),),
-                        const Spacer(),
-                        Container(width: 75, height: 75, color: Color.fromRGBO(4, 119, 111, 1),),
+
+                        SizedBox(
+                          height: 100,
+                          width: 100,
+                          child: TextButton(
+                            child: Text('AMAZON',
+                              style: TextStyle(fontSize: 20.0, fontFamily: 'Bebas Neue',fontWeight: FontWeight.bold,),),
+                            style: TextButton.styleFrom(
+                              primary: Colors.white,
+                              backgroundColor: Color.fromRGBO(4, 119, 111, 1),
+                            ),
+                            onPressed: () {
+                              Navigator.pushNamed(context, '/fifth');
+                            },
+
+                          ),
+                        ),
                         const Spacer(),
                       ]
                   ),
+                  Padding(padding: EdgeInsets.only(
+                      top: 20, bottom: 10),),
                   Row(
                       children: [
                         const Spacer(),
-                        Container(width: 75, height: 75, color: Color.fromRGBO(4, 119, 0, 1),),
+                        SizedBox(
+                          height: 100,
+                          width: 100,
+                          child: TextButton(
+                            child: Text('BANK OF AMERICA',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(fontSize: 20.0, fontFamily: 'Bebas Neue',fontWeight: FontWeight.bold,),),
+                            style: TextButton.styleFrom(
+                              primary: Colors.white,
+                              backgroundColor: Color.fromRGBO(4, 119, 111, 1),
+                            ),
+                            onPressed: () {
+                              Navigator.pushNamed(context, '/fifth');
+                            },
+
+                          ),
+                        ),
                         const Spacer(),
-                        Container(width: 75, height: 75, color: Color.fromRGBO(4, 119, 111, 1),),
+
+                        SizedBox(
+                          height: 100,
+                          width: 100,
+                          child: TextButton(
+                            child: Text('EXXON',
+                              style: TextStyle(fontSize: 20.0, fontFamily: 'Bebas Neue',fontWeight: FontWeight.bold,),),
+                            style: TextButton.styleFrom(
+                              primary: Colors.white,
+                              backgroundColor: Color.fromRGBO(4, 119, 111, 1),
+                            ),
+                            onPressed: () {
+                              Navigator.pushNamed(context, '/fifth');
+                            },
+
+                          ),
+                        ),
                         const Spacer(),
-                        Container(width: 75, height: 75, color: Color.fromRGBO(4, 119, 0, 1),),
-                        const Spacer(),
-                        Container(width: 75, height: 75, color: Color.fromRGBO(4, 119, 111, 1),),
-                        const Spacer(),
-                        Container(width: 75, height: 75, color: Color.fromRGBO(4, 119, 0, 1),),
+
+                        SizedBox(
+                          height: 100,
+                          width: 100,
+                          child: TextButton(
+                            child: Text('JP MORGAN',
+                              style: TextStyle(fontSize: 20.0, fontFamily: 'Bebas Neue',fontWeight: FontWeight.bold,),),
+                            style: TextButton.styleFrom(
+                              primary: Colors.white,
+                              backgroundColor: Color.fromRGBO(4, 119, 111, 1),
+                            ),
+                            onPressed: () {
+                              Navigator.pushNamed(context, '/fifth');
+                            },
+
+                          ),
+                        ),
                         const Spacer(),
                       ]
                   ),
             ],
             ),
+
             ),
-            const Spacer(),
+            Padding(padding: EdgeInsets.only(
+                top: 20, bottom: 10),),
+            Center(
+              child: TextButton(
+                child: Text('Continue',
+                  style: TextStyle(fontSize: 35.0, fontFamily: 'Bebas Neue',fontWeight: FontWeight.bold,),),
+                style: TextButton.styleFrom(
+                  primary: Colors.white,
+                  backgroundColor: Color.fromRGBO(239, 41, 23, 1),
+                  padding: EdgeInsets.only(
+                      top: 20, bottom: 10, right: 35, left: 35),
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                  ),
+                ),
+                onPressed: () {
+                  Navigator.pushNamed(context, '/sixth');
+                },
+
+              ),
+            ),
           ],
         ),
       ),
