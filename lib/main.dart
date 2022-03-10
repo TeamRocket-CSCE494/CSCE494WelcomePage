@@ -1,8 +1,9 @@
-import 'package:flutter/material.dart' as flutter_material;
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'dart:convert';
-import 'package:google_fonts/google_fonts.dart' as fonts;
+import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
-import 'package:flutter_form_builder/flutter_form_builder.dart' as flutter_form_builder;
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'dart:core';
 
 void main() {
@@ -402,95 +403,95 @@ class JoinLeagueScreen extends StatelessWidget {
     return new Scaffold(
       backgroundColor: Color.fromRGBO(01, 19, 36, 20),
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        centerTitle: true,
-        title: const Text('Join a League!')
+          backgroundColor: Colors.transparent,
+          centerTitle: true,
+          title: const Text('Join a League!')
       ),
       body: new Column(
-          children: [
-      Expanded(
-      child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Column(
-              children: [
-                Padding(
-                  
-                padding: EdgeInsets.only(top:15, bottom: 20),
-                child: Center(
-                  child: Text(
-                  'Moolah Master',
-                  style: TextStyle(
-                    fontSize: 60,
-                    fontWeight: FontWeight.bold,
-                    color: Color.fromRGBO(239, 41, 23, 1),
-                    fontFamily: 'Bebas Neue',),
-                  ),
-                ),
-                ),
-                Padding(
-                padding: EdgeInsets.only(top:0, bottom: 60),
-                  child: Image.asset(
-                    'assets/MoolahMasterLogo2.png',
-                    height: 200,
-                    width: 200,
-                  ),
-                ),
-              ],
-            ),
+        children: [
+          Expanded(
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Column(
+                    children: [
+                      Padding(
 
-            Column(
-              children: [
-                Center(
-                child: SizedBox(
-                  width: 350,
-                  child: FormBuilderTextField(
+                        padding: EdgeInsets.only(top:15, bottom: 20),
+                        child: Center(
+                          child: Text(
+                            'Moolah Master',
+                            style: TextStyle(
+                              fontSize: 60,
+                              fontWeight: FontWeight.bold,
+                              color: Color.fromRGBO(239, 41, 23, 1),
+                              fontFamily: 'Bebas Neue',),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(top:0, bottom: 60),
+                        child: Image.asset(
+                          'assets/MoolahMasterLogo2.png',
+                          height: 200,
+                          width: 200,
+                        ),
+                      ),
+                    ],
+                  ),
 
-                    name: 'joinedleague',
-                    cursorColor: Colors.white,
-                    style: TextStyle(
-                        color: Color.fromRGBO(239, 41, 23, 1), fontSize: 20),
-                    decoration: InputDecoration(
-                      labelText: 'ENTER A TEAM NAME:',
-                      labelStyle: TextStyle(color: Colors.white, fontSize: 30, fontWeight: FontWeight.bold,),
-                      enabledBorder: const OutlineInputBorder(
-                          borderSide:
-                          BorderSide(color: Colors.white, width: 0.0)),
-                      border: const OutlineInputBorder(),
+                  Column(
+                    children: [
+                      Center(
+                        child: SizedBox(
+                          width: 350,
+                          child: FormBuilderTextField(
+
+                            name: 'joinedleague',
+                            cursorColor: Colors.white,
+                            style: TextStyle(
+                                color: Color.fromRGBO(239, 41, 23, 1), fontSize: 20),
+                            decoration: InputDecoration(
+                              labelText: 'ENTER A TEAM NAME:',
+                              labelStyle: TextStyle(color: Colors.white, fontSize: 30, fontWeight: FontWeight.bold,),
+                              enabledBorder: const OutlineInputBorder(
+                                  borderSide:
+                                  BorderSide(color: Colors.white, width: 0.0)),
+                              border: const OutlineInputBorder(),
+                            ),
+                          ),
+
+                        ),
+                      ),
+                    ],
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(15),
+                  ),
+                  Center(
+                    child: TextButton(
+                      child: Text('Continue',
+                        style: TextStyle(fontSize: 35.0, fontFamily: 'Bebas Neue',fontWeight: FontWeight.bold,),),
+                      style: TextButton.styleFrom(
+                        primary: Colors.white,
+                        backgroundColor: Color.fromRGBO(239, 41, 23, 1),
+                        padding: EdgeInsets.only(
+                            top: 20, bottom: 10, right: 35, left: 35),
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                        ),
+                      ),
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/sixth');
+                      },
+
                     ),
                   ),
-
-                ),
-                ),
-              ],
+                ]
             ),
-            Padding(
-              padding: EdgeInsets.all(15),
-            ),
-            Center(
-            child: TextButton(
-              child: Text('Continue',
-                style: TextStyle(fontSize: 35.0, fontFamily: 'Bebas Neue',fontWeight: FontWeight.bold,),),
-              style: TextButton.styleFrom(
-                primary: Colors.white,
-                backgroundColor: Color.fromRGBO(239, 41, 23, 1),
-                padding: EdgeInsets.only(
-                    top: 20, bottom: 10, right: 35, left: 35),
-                shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                ),
-              ),
-              onPressed: () {
-                Navigator.pushNamed(context, '/sixth');
-              },
-
-            ),
-            ),
-          ]
+          ),
+        ],
       ),
-      ),
-      ],
-    ),
     );
   }
 }
@@ -551,7 +552,7 @@ class _CreateLineupPageState extends State<CreateLineupPage> {
                 top: 5, bottom: 10),),
             Text(
                 '${teamname}\'s current lineup:',
-                 style: TextStyle(color:Colors.white, fontFamily: 'bebas neue', fontSize: 30,)
+                style: TextStyle(color:Colors.white, fontFamily: 'bebas neue', fontSize: 30,)
             ),
             Padding(padding: EdgeInsets.only(
                 top: 5, bottom: 20),),
@@ -579,66 +580,66 @@ class _CreateLineupPageState extends State<CreateLineupPage> {
             Padding(padding: EdgeInsets.only(
                 top: 5, bottom: 10),),
             Expanded(
-            child: ListView(
-              scrollDirection: Axis.vertical,
+              child: ListView(
+                scrollDirection: Axis.vertical,
                 children: <Widget>[
                   Row(
-                    children: [
-                      const Spacer(),
-                      SizedBox(
-                        height: 100,
-                        width: 100,
-                      child: TextButton(
-                        child: Text('NASDAQ',
-                          style: TextStyle(fontSize: 20.0, fontFamily: 'Bebas Neue',fontWeight: FontWeight.bold,),),
-                        style: TextButton.styleFrom(
-                          primary: Colors.white,
-                          backgroundColor: Color.fromRGBO(4, 119, 111, 1),
-                        ),
-                        onPressed: () {
-                          Navigator.pushNamed(context, '/fifth');
-                        },
+                      children: [
+                        const Spacer(),
+                        SizedBox(
+                          height: 100,
+                          width: 100,
+                          child: TextButton(
+                            child: Text('NASDAQ',
+                              style: TextStyle(fontSize: 20.0, fontFamily: 'Bebas Neue',fontWeight: FontWeight.bold,),),
+                            style: TextButton.styleFrom(
+                              primary: Colors.white,
+                              backgroundColor: Color.fromRGBO(4, 119, 111, 1),
+                            ),
+                            onPressed: () {
+                              Navigator.pushNamed(context, '/fifth');
+                            },
 
-                      ),
-                      ),
-                      const Spacer(),
-
-                      SizedBox(
-                        height: 100,
-                        width: 100,
-                        child: TextButton(
-                          child: Text('APPLE',
-                            style: TextStyle(fontSize: 20.0, fontFamily: 'Bebas Neue',fontWeight: FontWeight.bold,),),
-                          style: TextButton.styleFrom(
-                            primary: Colors.white,
-                            backgroundColor: Color.fromRGBO(4, 119, 111, 1),
                           ),
-                          onPressed: () {
-                            Navigator.pushNamed(context, '/fifth');
-                          },
-
                         ),
-                      ),
-                      const Spacer(),
+                        const Spacer(),
 
-                      SizedBox(
-                        height: 100,
-                        width: 100,
-                        child: TextButton(
-                          child: Text('DOW JONES',
-                            style: TextStyle(fontSize: 20.0, fontFamily: 'Bebas Neue',fontWeight: FontWeight.bold,),),
-                          style: TextButton.styleFrom(
-                            primary: Colors.white,
-                            backgroundColor: Color.fromRGBO(4, 119, 111, 1),
+                        SizedBox(
+                          height: 100,
+                          width: 100,
+                          child: TextButton(
+                            child: Text('APPLE',
+                              style: TextStyle(fontSize: 20.0, fontFamily: 'Bebas Neue',fontWeight: FontWeight.bold,),),
+                            style: TextButton.styleFrom(
+                              primary: Colors.white,
+                              backgroundColor: Color.fromRGBO(4, 119, 111, 1),
+                            ),
+                            onPressed: () {
+                              Navigator.pushNamed(context, '/fifth');
+                            },
+
                           ),
-                          onPressed: () {
-                            Navigator.pushNamed(context, '/fifth');
-                          },
-
                         ),
-                      ),
-                      const Spacer(),
-                    ]
+                        const Spacer(),
+
+                        SizedBox(
+                          height: 100,
+                          width: 100,
+                          child: TextButton(
+                            child: Text('DOW JONES',
+                              style: TextStyle(fontSize: 20.0, fontFamily: 'Bebas Neue',fontWeight: FontWeight.bold,),),
+                            style: TextButton.styleFrom(
+                              primary: Colors.white,
+                              backgroundColor: Color.fromRGBO(4, 119, 111, 1),
+                            ),
+                            onPressed: () {
+                              Navigator.pushNamed(context, '/fifth');
+                            },
+
+                          ),
+                        ),
+                        const Spacer(),
+                      ]
                   ),
                   Padding(padding: EdgeInsets.only(
                       top: 20, bottom: 10),),
@@ -761,8 +762,8 @@ class _CreateLineupPageState extends State<CreateLineupPage> {
                         const Spacer(),
                       ]
                   ),
-            ],
-            ),
+                ],
+              ),
 
             ),
             Padding(padding: EdgeInsets.only(
@@ -830,7 +831,7 @@ class _ViewLineupPageState extends State<ViewLineupPage> {
                 top: 5, bottom: 10),),
             Text(
                 '${teamname}\'s current lineup:',
-                 style: TextStyle(color:Colors.white, fontFamily: 'bebas neue', fontSize: 30,)
+                style: TextStyle(color:Colors.white, fontFamily: 'bebas neue', fontSize: 30,)
             ),
             Padding(padding: EdgeInsets.only(
                 top: 5, bottom: 20),),
@@ -840,15 +841,41 @@ class _ViewLineupPageState extends State<ViewLineupPage> {
               // stocks
               children: [
                 const Spacer(),
-                Container(width: 75, height: 75, color: Color.fromRGBO(239, 41, 23, 1), ),
+                Container(
+                  width: 75,
+                  height: 75,
+                  color: Color.fromRGBO(239, 41, 23, 1),
+                  child: Text('Name and price here',),
+                ),
+
                 const Spacer(),
-                Container(width: 75, height: 75, color: Color.fromRGBO(239, 41, 23, 1)),
+                Container(
+                  width: 75,
+                  height: 75,
+                  color: Color.fromRGBO(239, 41, 23, 1),
+                  child: Text('Name and price here'),
+                ),
                 const Spacer(),
-                Container(width: 75, height: 75, color: Color.fromRGBO(239, 41, 23, 1)),
+                Container(
+                  width: 75,
+                  height: 75,
+                  color: Color.fromRGBO(239, 41, 23, 1),
+                  child: Text('Name and price here'),
+                ),
                 const Spacer(),
-                Container(width: 75, height: 75, color: Color.fromRGBO(239, 41, 23, 1)),
+                Container(
+                  width: 75,
+                  height: 75,
+                  color: Color.fromRGBO(239, 41, 23, 1),
+                  child: Text('Name and price here'),
+                ),
                 const Spacer(),
-                Container(width: 75, height: 75, color: Color.fromRGBO(239, 41, 23, 1)),
+                Container(
+                  width: 75,
+                  height: 75,
+                  color: Color.fromRGBO(239, 41, 23, 1),
+                  child: Text('Name and price here'),
+                ),
                 const Spacer(),
               ],
             ),
@@ -858,66 +885,66 @@ class _ViewLineupPageState extends State<ViewLineupPage> {
             Padding(padding: EdgeInsets.only(
                 top: 5, bottom: 10),),
             Expanded(
-            child: ListView(
-              scrollDirection: Axis.vertical,
+              child: ListView(
+                scrollDirection: Axis.vertical,
                 children: <Widget>[
                   Row(
-                    children: [
-                      const Spacer(),
-                      SizedBox(
-                        height: 100,
-                        width: 100,
-                      child: TextButton(
-                        child: Text('NASDAQ',
-                          style: TextStyle(fontSize: 20.0, fontFamily: 'Bebas Neue',fontWeight: FontWeight.bold,),),
-                        style: TextButton.styleFrom(
-                          primary: Colors.white,
-                          backgroundColor: Color.fromRGBO(4, 119, 111, 1),
-                        ),
-                        onPressed: () {
-                          Navigator.pushNamed(context, '/fifth');
-                        },
+                      children: [
+                        const Spacer(),
+                        SizedBox(
+                          height: 100,
+                          width: 100,
+                          child: TextButton(
+                            child: Text('NASDAQ',
+                              style: TextStyle(fontSize: 20.0, fontFamily: 'Bebas Neue',fontWeight: FontWeight.bold,),),
+                            style: TextButton.styleFrom(
+                              primary: Colors.white,
+                              backgroundColor: Color.fromRGBO(4, 119, 111, 1),
+                            ),
+                            onPressed: () {
+                              Navigator.pushNamed(context, '/fifth');
+                            },
 
-                      ),
-                      ),
-                      const Spacer(),
-
-                      SizedBox(
-                        height: 100,
-                        width: 100,
-                        child: TextButton(
-                          child: Text('APPLE',
-                            style: TextStyle(fontSize: 20.0, fontFamily: 'Bebas Neue',fontWeight: FontWeight.bold,),),
-                          style: TextButton.styleFrom(
-                            primary: Colors.white,
-                            backgroundColor: Color.fromRGBO(4, 119, 111, 1),
                           ),
-                          onPressed: () {
-                            Navigator.pushNamed(context, '/fifth');
-                          },
-
                         ),
-                      ),
-                      const Spacer(),
+                        const Spacer(),
 
-                      SizedBox(
-                        height: 100,
-                        width: 100,
-                        child: TextButton(
-                          child: Text('DOW JONES',
-                            style: TextStyle(fontSize: 20.0, fontFamily: 'Bebas Neue',fontWeight: FontWeight.bold,),),
-                          style: TextButton.styleFrom(
-                            primary: Colors.white,
-                            backgroundColor: Color.fromRGBO(4, 119, 111, 1),
+                        SizedBox(
+                          height: 100,
+                          width: 100,
+                          child: TextButton(
+                            child: Text('APPLE',
+                              style: TextStyle(fontSize: 20.0, fontFamily: 'Bebas Neue',fontWeight: FontWeight.bold,),),
+                            style: TextButton.styleFrom(
+                              primary: Colors.white,
+                              backgroundColor: Color.fromRGBO(4, 119, 111, 1),
+                            ),
+                            onPressed: () {
+                              Navigator.pushNamed(context, '/fifth');
+                            },
+
                           ),
-                          onPressed: () {
-                            Navigator.pushNamed(context, '/fifth');
-                          },
-
                         ),
-                      ),
-                      const Spacer(),
-                    ]
+                        const Spacer(),
+
+                        SizedBox(
+                          height: 100,
+                          width: 100,
+                          child: TextButton(
+                            child: Text('DOW JONES',
+                              style: TextStyle(fontSize: 20.0, fontFamily: 'Bebas Neue',fontWeight: FontWeight.bold,),),
+                            style: TextButton.styleFrom(
+                              primary: Colors.white,
+                              backgroundColor: Color.fromRGBO(4, 119, 111, 1),
+                            ),
+                            onPressed: () {
+                              Navigator.pushNamed(context, '/fifth');
+                            },
+
+                          ),
+                        ),
+                        const Spacer(),
+                      ]
                   ),
                   Padding(padding: EdgeInsets.only(
                       top: 20, bottom: 10),),
@@ -1040,8 +1067,8 @@ class _ViewLineupPageState extends State<ViewLineupPage> {
                         const Spacer(),
                       ]
                   ),
-            ],
-            ),
+                ],
+              ),
 
             ),
             Padding(padding: EdgeInsets.only(
