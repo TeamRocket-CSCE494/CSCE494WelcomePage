@@ -7,7 +7,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'dart:core';
-import 'package:camera_roll_uploader/camera_roll_uploader.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -1261,85 +1260,261 @@ class _ViewLineupPageState extends State<ViewLineupPage> {
 }
 
 class ProfilePicUploadPage extends StatefulWidget {
+  const ProfilePicUploadPage({Key? key, this.title}) : super(key: key);
+
+  final String? title;
+
   @override
-  State<ProfilePicUploadPage> createState() => _ProfilePicUploadPageState();
+  _ProfilePicUploadPageState createState() => _ProfilePicUploadPageState();
 }
 
 class _ProfilePicUploadPageState extends State<ProfilePicUploadPage> {
-  var image;
-  var imgpath;
+  List<XFile>? _imageFileList;
+
+  set _imageFile(XFile? value) {
+    _imageFileList = value == null ? null : <XFile>[value];
+  }
+
+  dynamic _pickImageError;
+
+  VideoPlayerController? _controller;
+  VideoPlayerController? _toBeDisposed;
+  String? _retrieveDataError;
+
+  final ImagePicker _picker = ImagePicker();
+  final TextEditingController maxWidthController = TextEditingController();
+  final TextEditingController maxHeightController = TextEditingController();
+  final TextEditingController qualityController = TextEditingController();
+
+  Future<void> _onImageButtonPressed(ImageSource source,
+      {BuildContext? context}) async {
+    if (_controller != null) {
+      await _controller!.setVolume(0.0);
+    }
+    await _displayPickImageDialog(context!,
+          (double? maxWidth, double? maxHeight, int? quality) async {
+        try {
+          final XFile? pickedFile = await _picker.pickImage(
+            source: source,
+            maxWidth: maxWidth,
+            maxHeight: maxHeight,
+            imageQuality: quality,
+          );
+          setState(() {
+            _imageFile = pickedFile;
+          });
+        } catch (e) {
+          setState(() {
+            _pickImageError = e;
+          });
+        }
+      });
+  }
+
+  @override
+  void deactivate() {
+    if (_controller != null) {
+      _controller!.setVolume(0.0);
+      _controller!.pause();
+    }
+    super.deactivate();
+  }
+
+  @override
+  void dispose() {
+    maxWidthController.dispose();
+    maxHeightController.dispose();
+    qualityController.dispose();
+    super.dispose();
+  }
+  Widget _previewImages() {
+    final Text? retrieveError = _getRetrieveErrorWidget();
+    if (retrieveError != null) {
+      return retrieveError;
+    }
+    if (_imageFileList != null) {
+      return Semantics(
+          child: ListView.builder(
+            key: UniqueKey(),
+            itemBuilder: (BuildContext context, int index) {
+              // Why network for web?
+              // See https://pub.dev/packages/image_picker#getting-ready-for-the-web-platform
+              return Semantics(
+                label: 'image_picker_example_picked_image',
+                child: kIsWeb
+                    ? Image.network(_imageFileList![index].path)
+                    : Image.file(IO.File(_imageFileList![index].path)),
+              );
+            },
+            itemCount: _imageFileList!.length,
+          ),
+          label: 'image_picker_example_picked_images');
+    } else if (_pickImageError != null) {
+      return Text(
+        'Pick image error: $_pickImageError',
+        textAlign: TextAlign.center,
+      );
+    } else {
+      return const Text(
+        'You have not yet picked an image.',
+        textAlign: TextAlign.center,
+      );
+    }
+  }
+
+  Widget _handlePreview() {
+    return _previewImages();
+  }
+
+  Future<void> retrieveLostData() async {
+    final LostDataResponse response = await _picker.retrieveLostData();
+    if (response.isEmpty) {
+      return;
+    }
+    if (response.file != null) {
+      setState(() {
+        _imageFile = response.file;
+        _imageFileList = response.files;
+      });
+    } else {
+      _retrieveDataError = response.exception!.code;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Builder(
-        builder: (BuildContext context) => Scaffold(
-          appBar: AppBar(
-            title: Text("Embedded Camera Roll Picker"),
-          ),
-          body: CameraRollUploader(
-            isDownloadingImage: (downloading) {
-              print("downloading $downloading");
-            },
-            selectedImageCallback: (imagePath) {
-              print("imagePath $imagePath");
-              Image.file(IO.File(imagePath!),fit: BoxFit.cover,);
-              imgpath = imagePath;
-            },
-          ),
-          floatingActionButton: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              (IO.Platform.isIOS)
-                  ? Padding(
-                padding: const EdgeInsets.only(bottom: 8.0),
-                child: SizedBox(
-                  width: 80,
-                  height: 80,
-                  child: FloatingActionButton(
-                    heroTag: "modal",
-                    child: Text(
-                      "SHOW\nMODAL",
-                      textAlign: TextAlign.center,
-                    ),
-                    onPressed: () => _openPicker(context),
-                  ),
-                ),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title!),
+      ),
+      body: Center(
+        child: !kIsWeb && defaultTargetPlatform == TargetPlatform.android
+            ? FutureBuilder<void>(
+                future: retrieveLostData(),
+                builder: (BuildContext context, AsyncSnapshot<void> snapshot) {
+                  switch (snapshot.connectionState) {
+                    case ConnectionState.none:
+                    case ConnectionState.waiting:
+                      return const Text(
+                        'You have not yet picked an image.',
+                        textAlign: TextAlign.center,
+                      );
+                    case ConnectionState.done:
+                      return _handlePreview();
+                    default:
+                      if (snapshot.hasError) {
+                        return Text(
+                          'Pick image/video error: ${snapshot.error}}',
+                          textAlign: TextAlign.center,
+                        );
+                      } else {
+                        return const Text(
+                          'You have not yet picked an image.',
+                          textAlign: TextAlign.center,
+                        );
+                      }
+                  }
+                },
               )
-                  : Container(
-                width: 0.0,
-                height: 0.0,
-              ),
-              SizedBox(
-                width: 80,
-                height: 80,
-                child: FloatingActionButton(
-                  heroTag: "push",
-                  backgroundColor: Colors.black,
-                  child: Text(
-                    "Back",
-                    textAlign: TextAlign.center,
-                  ),
-                  onPressed: () => Navigator.pushNamed(context, '/first'),
-                ),
-              )
-            ],
+            : _handlePreview(),
+      ),
+      floatingActionButton: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: <Widget>[
+          Semantics(
+            label: 'image_picker_example_from_gallery',
+            child: FloatingActionButton(
+              onPressed: () {
+                _onImageButtonPressed(ImageSource.gallery, context: context);
+              },
+              heroTag: 'image0',
+              tooltip: 'Pick Image from gallery',
+              child: const Icon(Icons.photo),
+            ),
           ),
-        ),
+          Padding(
+            padding: const EdgeInsets.only(top: 16.0),
+            child: FloatingActionButton(
+              onPressed: () {
+                _onImageButtonPressed(ImageSource.camera, context: context);
+              },
+              heroTag: 'image2',
+              tooltip: 'Take a Photo',
+              child: const Icon(Icons.camera_alt),
+            ),
+          ),
+        ],
       ),
     );
   }
 
-  void _openPicker(BuildContext context, {bool isModal = true}) {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        fullscreenDialog: isModal,
+  Text? _getRetrieveErrorWidget() {
+    if (_retrieveDataError != null) {
+      final Text result = Text(_retrieveDataError!);
+      _retrieveDataError = null;
+      return result;
+    }
+    return null;
+  }
+
+  Future<void> _displayPickImageDialog(
+      BuildContext context, OnPickImageCallback onPick) async {
+    return showDialog(
+        context: context,
         builder: (BuildContext context) {
-          return Scaffold(
-            appBar: AppBar(),
-            body: CameraRollUploader(),
+          return AlertDialog(
+            title: const Text('Add optional parameters'),
+            content: Column(
+              children: <Widget>[
+                TextField(
+                  controller: maxWidthController,
+                  keyboardType:
+                      const TextInputType.numberWithOptions(decimal: true),
+                  decoration: const InputDecoration(
+                      hintText: 'Enter maxWidth if desired'),
+                ),
+                TextField(
+                  controller: maxHeightController,
+                  keyboardType:
+                      const TextInputType.numberWithOptions(decimal: true),
+                  decoration: const InputDecoration(
+                      hintText: 'Enter maxHeight if desired'),
+                ),
+                TextField(
+                  controller: qualityController,
+                  keyboardType: TextInputType.number,
+                  decoration: const InputDecoration(
+                      hintText: 'Enter quality if desired'),
+                ),
+              ],
+            ),
+            actions: <Widget>[
+              TextButton(
+                child: const Text('CANCEL'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+              TextButton(
+                  child: const Text('PICK'),
+                  onPressed: () {
+                    final double? width = maxWidthController.text.isNotEmpty
+                        ? double.parse(maxWidthController.text)
+                        : null;
+                    final double? height = maxHeightController.text.isNotEmpty
+                        ? double.parse(maxHeightController.text)
+                        : null;
+                    final int? quality = qualityController.text.isNotEmpty
+                        ? int.parse(qualityController.text)
+                        : null;
+                    onPick(width, height, quality);
+                    Navigator.of(context).pop();
+                  }),
+            ],
           );
-        },
-      ),
-    );
+        });
   }
 }
+
+typedef OnPickImageCallback = void Function(
+    double? maxWidth, double? maxHeight, int? quality);
