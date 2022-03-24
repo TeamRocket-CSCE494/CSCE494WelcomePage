@@ -14,15 +14,16 @@ void main() {
   runApp(MaterialApp(
     initialRoute: '/',
     routes: {
-      '/': (context) => MyApp(),
-      '/first': (context) => MyApp(),
+      '/': (context) => MyApp(), // homepage
+      '/first': (context) => MyApp(), // another way to get to the homepage
       '/second': (context) => ChooseLeagueType(),
       '/third': (context) => CreateLeague(),
       '/fourth': (context) => JoinLeagueApp(),
       '/fifth': (context) => JoinSpecificLeague(),
       '/sixth': (context) => CreateLineupPage(),
       '/seventh': (context) => ViewLineupPage(),
-      '/eighth': (context) => ProfilePicUploadPage()
+      '/eighth': (context) => ProfilePicUploadPage(),
+      '/ninth': (context) => ViewNewsPage(),
     },
   ));
 }
@@ -113,6 +114,7 @@ class MyApp extends StatelessWidget {
                 Navigator.pushNamed(context, '/second');
               },
             ),
+            Spacer(flex: 1),
             TextButton(
               child: Text(
                 'Change Profile Pic',
@@ -135,7 +137,11 @@ class MyApp extends StatelessWidget {
                 Navigator.pushNamed(context, '/eighth');
               },
             ),
-          ])),
+            Spacer(flex: 1),
+
+          ]
+          )
+      ),
     );
   }
 }
@@ -1530,4 +1536,132 @@ class _ProfilePicUploadPageState extends State<ProfilePicUploadPage> {
 }
 
 typedef OnPickImageCallback = void Function(
-    double? maxWidth, double? maxHeight, int? quality);
+    double? maxWidth, 
+    double? maxHeight, 
+    int? quality
+);
+
+class ViewNewsPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("News"),
+        backgroundColor: Colors.blueGrey,
+        actions: <Widget>[
+          IconButton(
+            icon: const BackButtonIcon(),
+            color: Colors.red,
+            tooltip: "Back",
+            onPressed: () {
+              Navigator.maybePop(context);
+            },
+          ),
+        ],
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: const <Widget>[
+            const Spacer(),
+            Text('Here are some recent articles that may help you during gameplay.'),
+            const Spacer(),
+            Text(
+              'headline 1',
+              style: TextStyle(
+                fontSize: 32.0,
+                fontFamily: 'Bebas Neue',
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const Spacer(),
+            Text(
+              'headline 2',
+              style: TextStyle(
+                fontSize: 32.0,
+                fontFamily: 'Bebas Neue',
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const Spacer(),
+            Text(
+              'headline 3',
+              style: TextStyle(
+                fontSize: 32.0,
+                fontFamily: 'Bebas Neue',
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const Spacer(),
+            Text(
+              'headline 4',
+              style: TextStyle(
+                fontSize: 32.0,
+                fontFamily: 'Bebas Neue',
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const Spacer(),
+            Text(
+              'headline 5',
+              style: TextStyle(
+                fontSize: 32.0,
+                fontFamily: 'Bebas Neue',
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const Spacer(),
+            Text(
+              'headline 6',
+              style: TextStyle(
+                fontSize: 32.0,
+                fontFamily: 'Bebas Neue',
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const Spacer(),
+            Text(
+              'headline 7',
+              style: TextStyle(
+                fontSize: 32.0,
+                fontFamily: 'Bebas Neue',
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const Spacer(),
+            Text(
+              'headline 8',
+              style: TextStyle(
+                fontSize: 32.0,
+                fontFamily: 'Bebas Neue',
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const Spacer(),
+            Text(
+              'headline 9',
+              style: TextStyle(
+                fontSize: 32.0,
+                fontFamily: 'Bebas Neue',
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const Spacer(),
+            Text(
+              'headline 10',
+              style: TextStyle(
+                fontSize: 32.0,
+                fontFamily: 'Bebas Neue',
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const Spacer(),
+
+          ],
+        ),
+      ),
+
+    );
+  }
+
+}
