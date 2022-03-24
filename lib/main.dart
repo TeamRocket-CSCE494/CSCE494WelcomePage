@@ -7,7 +7,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'dart:core';
-
 import 'package:image_picker/image_picker.dart';
 import 'package:video_player/video_player.dart';
 
@@ -1388,7 +1387,7 @@ class _ProfilePicUploadPageState extends State<ProfilePicUploadPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title!),
+        title: Text("Change Profile Pic"),
       ),
       body: Center(
         child: !kIsWeb && defaultTargetPlatform == TargetPlatform.android
@@ -1446,6 +1445,17 @@ class _ProfilePicUploadPageState extends State<ProfilePicUploadPage> {
               child: const Icon(Icons.camera_alt),
             ),
           ),
+          Padding(
+            padding: const EdgeInsets.only(top: 16.0),
+            child: IconButton(
+              icon: const BackButtonIcon(),
+              color: Colors.red,
+              tooltip: "Back",
+              onPressed: () {
+                Navigator.maybePop(context);
+              },
+            ),
+          )
         ],
       ),
     );
