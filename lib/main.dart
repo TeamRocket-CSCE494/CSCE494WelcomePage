@@ -8,6 +8,9 @@ import 'package:http/http.dart' as http;
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'dart:core';
 
+import 'package:image_picker/image_picker.dart';
+import 'package:video_player/video_player.dart';
+
 void main() {
   runApp(MaterialApp(
     initialRoute: '/',
