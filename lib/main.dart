@@ -1566,7 +1566,9 @@ class ViewNewsPage extends StatelessWidget {
           children: const <Widget>[
             const Spacer(),
             Text('Here are some recent articles that may help you during gameplay.',
-            style: TextStyle(color: Colors.white),),
+            style: TextStyle(
+                fontSize: 20.0,
+                color: Colors.white),),
             const Spacer(),
             Text(
               'headline 1',
