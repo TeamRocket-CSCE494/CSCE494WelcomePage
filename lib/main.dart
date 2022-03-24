@@ -1468,7 +1468,7 @@ class _ProfilePicUploadPageState extends State<ProfilePicUploadPage> {
           return AlertDialog(
             title: const Text('Add optional parameters'),
             content: Column(
-              children: <Widget>[
+              children: <Widget>[ // these are all optional but I'm leaving them in in case the user wants/needs to modify their pic
                 TextField(
                   controller: maxWidthController,
                   keyboardType:
